@@ -15,8 +15,9 @@ mix.setPublicPath(dist)
     .minify(dist + "js/main.js")
     .sourceMaps(true)
     .version()
+    .react()
     .browserSync({
-        proxy: 'http://localhost/silverstripe-template/public',
+        proxy: 'http://localhost/portfolio-spa/public',
         files: [
             "public/_resources/app/client/dist/css/*.css",
             "public/_resources/app/client/dist/js/*.js",

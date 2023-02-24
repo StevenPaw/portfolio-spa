@@ -1,16 +1,11 @@
 import GLightbox from "glightbox";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./react/App.jsx";
 
-document.addEventListener("DOMContentLoaded", function (event) {
+const container = document.getElementById('react-entry');
+const root = ReactDOM.createRoot(container);
 
-    const menu_button = document.querySelector('[data-behaviour="toggle-menu"]');
-
-    menu_button.addEventListener('click', () => {
-        document.body.classList.toggle('body--show');
-    })
-
-    const lightbox = GLightbox({
-        selector: '[data-gallery="gallery"]',
-        touchNavigation: true,
-        loop: true,
-    });
-});
+root.render(
+    <App container={container}/>
+);

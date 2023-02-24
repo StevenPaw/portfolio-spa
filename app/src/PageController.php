@@ -2,12 +2,13 @@
 
 namespace {
 
+    use SilverStripe\Control\HTTPRequest;
     use SilverStripe\CMS\Controllers\ContentController;
 
     /**
  * Class \PageController
  *
- * @property \Page dataRecord
+ * @property \Page $dataRecord
  * @method \Page data()
  * @mixin \Page
  */
@@ -28,13 +29,30 @@ namespace {
          *
          * @var array
          */
-        private static $allowed_actions = [];
+        private static $allowed_actions = [
+           'feedViewableData'
+        ];
+
+        private static $url_handlers = [
+            'fetchViewableData' => 'feedViewableData'
+        ];
 
         protected function init()
         {
             parent::init();
             // You can include any CSS or JS required by your project here.
             // See: https://docs.silverstripe.org/en/developer_guides/templates/requirements/
+        }
+
+        public function feedViewableData(HTTPRequest $request)
+        {
+            $viewableData = [
+                "Content" => $this->Content
+            ];
+            $json = json_encode($viewableData);
+            $this->getResponse()->addHeader('Content-type', 'application/json');
+            //echo "Test: " + $json;
+            return $json;
         }
     }
 }
